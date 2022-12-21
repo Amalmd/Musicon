@@ -19,13 +19,22 @@ const Img = styled.img`
 
 const Home = () => {
   const [text, setText] = useState("");
-  const [url, setUrl] = useState("");
+  const [Id, setId] = useState("");
+
   const handleClick = async () => {
-    const { data } = await axios.post("http://localhost:4000/searchVideo", {
-      convertedText: text,
-    });
-    setUrl(() => data[0].link);
-    console.log(data);
+    try {
+      const { data } = await axios.post("http://localhost:4000/searchVideo", {
+        convertedText: text,
+      });
+      console.log(data);
+      const link = await data[0].link;
+
+      const id = link && link.split("=");
+      setId(() => id[1]);
+      console.log(id);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -33,8 +42,14 @@ const Home = () => {
       <Img src={"/musiconLogo.png"} alt="Musicon" />
       <SerchInput handleClick={handleClick} setText={setText} text={text} />
       <h3>{text}</h3>
-      <ReactPlayer url={url} playing={false} controls volume={1} />
-      {/* <Youtube></Youtube> */}
+      <iframe
+        width="600"
+        height="400"
+        className="video"
+        title="Youtube player"
+        sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
+        src={Id ? `https://youtube.com/embed/${Id}?autoplay=0` : null}
+      ></iframe>
     </Div>
   );
 };
