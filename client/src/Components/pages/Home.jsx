@@ -18,6 +18,7 @@ const Img = styled.img`
 const Home = () => {
    const [text, setText] = useState("");
    const [Id, setId] = useState("");
+   const [isLoading, setIsLoading] = useState(false)
 
    const navigate = useNavigate();
    const logout = async (e) => {
