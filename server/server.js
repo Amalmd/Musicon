@@ -8,15 +8,15 @@ import cors from "cors";
 import "./db/mongoose.js";
 import {createUser, login} from "./controllers/controller.js";
 import {scrapeFromYoutube} from "./youtubeScraper.js";
-import * as url from 'url';
-import path from 'path';
-const __dirname = url.fileURLToPath(new URL('./', import.meta.url));
+import * as url from "url";
+import path from "path";
+const __dirname = url.fileURLToPath(new URL("./", import.meta.url));
 const PORT = process.env.PORT || 5000;
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
-const publicPath = path.join(__dirname,'build');
+const publicPath = path.join(__dirname, "build");
 app.use(express.static(publicPath));
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,10 +57,10 @@ app.post("/searchVideo", async (req, res) => {
    res.status(200).send(getData);
 });
 console.log(__dirname);
-app.get('*', (req, res) => {
+app.get("*", (req, res) => {
    console.log(__dirname);
-   res.sendFile(path.resolve(__dirname, 'build','index.html'));
- });
+   res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
 app.listen(PORT, function () {
    console.log(`server started on port ${PORT} ...`);
