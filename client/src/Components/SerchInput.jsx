@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import { converText } from "../utils";
+
 const SerchInput = ({ text, setText, handleClick }) => {
   return (
     <div className="searchbar">
