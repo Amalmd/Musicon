@@ -34,6 +34,7 @@ const Home = () => {
 
    const handleClick = async () => {
       try {
+        setIsLoading(true)
          const {data} = await Api.post("/searchVideo", {
             convertedText: text,
          });
@@ -41,6 +42,7 @@ const Home = () => {
          const id = link && link.split("=");
          setId(() => id[1]);
          console.log(id);
+         setIsLoading(false)
       } catch (error) {
          console.log(error);
       }
