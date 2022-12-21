@@ -6,21 +6,19 @@ const Div = styled.div`
    width: 100%;
    display: grid;
    justify-items: center;
-   align-items: center;
+   align-content: center;
 `;
 
 const Img = styled.img`
    height: auto;
    width: 80%;
-   display: grid;
-   justify-items: center;
-   align-items: center;
 `;
 
 const Home = () => {
+
    return (
       <Div>
-         <Img src={'/musiconLogo.png'} alt="Musicon" />
+         <Img src={"/musiconLogo.png"} alt="Musicon" />
          <SerchInput />
       </Div>
    );
