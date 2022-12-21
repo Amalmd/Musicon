@@ -16,38 +16,34 @@ const Img = styled.img`
 `;
 
 const Home = () => {
-  const [text, setText] = useState("");
-  const [Id, setId] = useState("");
-  const [isLoading, setisLoading] = useState(false)
-  const navigate = useNavigate();
-  const logout = async (e) => {
-     e.preventDefault();
-     try {
-         await Api.get("/logout");
-        localStorage.removeItem("userValues");
-        navigate("/login");
-     } catch {
-        console.log("error");
-     }
-  };
-  const handleClick = async () => {
-    try {
-      setisLoading(true)
-      const { data } = await Api.post("http://localhost:4000/searchVideo", {
-        convertedText: text,
-      });
-      console.log(data);
-      const link = await data[0].link;
+   const [text, setText] = useState("");
+   const [Id, setId] = useState("");
 
-      const id = link && link.split("=");
-      setId(() => id[1]);
-      console.log(id);
+   const navigate = useNavigate();
+   const logout = async (e) => {
+      e.preventDefault();
+      try {
+          await Api.get("/logout");
+         localStorage.removeItem("userValues");
+         navigate("/login");
+      } catch {
+         console.log("error");
+      }
+   };
 
-      setisLoading(false)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+   const handleClick = async () => {
+      try {
+         const {data} = await Api.post("/searchVideo", {
+            convertedText: text,
+         });
+         const link = await data[0].link;
+         const id = link && link.split("=");
+         setId(() => id[1]);
+         console.log(id);
+      } catch (error) {
+         console.log(error);
+      }
+   };
 
   return (
     <Div>
