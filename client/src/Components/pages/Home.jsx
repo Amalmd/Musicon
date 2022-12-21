@@ -1,29 +1,39 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import SerchInput from "../SerchInput";
 import {Spinner} from 'reactstrap'
+import {Api} from "../../api/Api";
+import {useNavigate} from "react-router-dom";
 const Div = styled.div`
   width: 100%;
   display: grid;
   justify-items: center;
   align-content: center;
-`;
-
+`
 const Img = styled.img`
-  height: auto;
-  width: 80%;
+   height: auto;
+   width: 80%;
 `;
 
 const Home = () => {
   const [text, setText] = useState("");
   const [Id, setId] = useState("");
   const [isLoading, setisLoading] = useState(false)
-
+  const navigate = useNavigate();
+  const logout = async (e) => {
+     e.preventDefault();
+     try {
+         await Api.get("/logout");
+        localStorage.removeItem("userValues");
+        navigate("/login");
+     } catch {
+        console.log("error");
+     }
+  };
   const handleClick = async () => {
     try {
       setisLoading(true)
-      const { data } = await axios.post("http://localhost:4000/searchVideo", {
+      const { data } = await Api.post("http://localhost:4000/searchVideo", {
         convertedText: text,
       });
       console.log(data);
@@ -44,6 +54,7 @@ const Home = () => {
       <Img src={"/musiconLogo.png"} alt="Musicon" />
       <SerchInput handleClick={handleClick} setText={setText} text={text} />
       <h3>{text}</h3>
+      <button onClick={logout}>logout</button>
       {isLoading?<Spinner  style={{
       height: '4rem',
       width: '4rem'
@@ -58,7 +69,7 @@ const Home = () => {
         src={Id ? `https://youtube.com/embed/${Id}?autoplay=0` : null}
       ></iframe>}
     </Div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

@@ -1,32 +1,35 @@
-import axios from "axios";
 import React from "react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Api } from "../api/Api";
 
-export default function Register({ userValues, setUserValues, setIsLoggedIn }) {
+export default function Register({   }) {
   const [register, setRegister] = useState({
     username: "",
     password: "",
   });
+
   const navigate = useNavigate();
   const pass = useRef();
   const repPass = useRef();
+  
   const registerHandler = async (e) => {
     e.preventDefault();
     try {
       if (pass.current.value === repPass.current.value) {
-        await axios.post("http://localhost:4000/register", register);
-        setIsLoggedIn(true);
+        await Api.post("/register", register);
+        // setIsLoggedIn(true);
         localStorage.setItem("userValues", register.username);
-        navigate("/homepage");
+        navigate("/login");
       }
     } catch {
       localStorage.removeItem("userValues");
       console.log("error");
     }
   };
+  
   return (
-    <form className="vh-100" style={{ backgroundColor: "#508bfc" }}>
+    <form className="vh-100" style={{ backgroundColor: "#252525" }}>
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">

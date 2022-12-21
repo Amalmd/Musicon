@@ -30,8 +30,7 @@
     "mongoose": "^6.8.1",
     "passport": "^0.6.0",
     "passport-local-mongoose": "^7.1.2",
-    "puppeteer": "^19.4.1",
-    "react-youtube": "^10.1.0"
+    "puppeteer": "^19.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
