@@ -3,7 +3,6 @@ import styled from "styled-components";
 import SerchInput from "../SerchInput";
 import {Spinner} from 'reactstrap'
 import {Api} from "../../api/Api";
-import {useNavigate} from "react-router-dom";
 const Div = styled.div`
   width: 100%;
   display: grid;
@@ -19,18 +18,6 @@ const Home = () => {
    const [text, setText] = useState("");
    const [Id, setId] = useState("");
    const [isLoading, setIsLoading] = useState(false)
-
-   const navigate = useNavigate();
-   const logout = async (e) => {
-      e.preventDefault();
-      try {
-          await Api.get("/logout");
-         localStorage.removeItem("userValues");
-         navigate("/login");
-      } catch {
-         console.log("error");
-      }
-   };
 
    const handleClick = async () => {
       try {
@@ -53,7 +40,6 @@ const Home = () => {
       <Img src={"/musiconLogo.png"} alt="Musicon" />
       <SerchInput handleClick={handleClick} setText={setText} text={text} />
       <h3>{text}</h3>
-      <button onClick={logout}>logout</button>
       {isLoading?<Spinner  style={{
       height: '4rem',
       width: '4rem'
