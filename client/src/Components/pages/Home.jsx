@@ -20,7 +20,6 @@ const Img = styled.img`
 const Home = () => {
    const [text, setText] = useState("");
    const [Id, setId] = useState("");
-
    const navigate = useNavigate();
    const logout = async (e) => {
       e.preventDefault();
@@ -41,7 +40,7 @@ const Home = () => {
          const link = await data[0].link;
          const id = link && link.split("=");
          setId(() => id[1]);
-         console.log(id);
+
       } catch (error) {
          console.log(error);
       }
