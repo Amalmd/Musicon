@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { converText } from "../utils";
-const SerchInput = ({ text, setText }) => {
+const SerchInput = ({ text, setText, handleClick }) => {
   return (
     <div className="searchbar">
       <div className="searchbar-wrapper">
@@ -31,6 +31,7 @@ const SerchInput = ({ text, setText }) => {
             }}
             placeholder="Search Musicon"
           />
+          <button onClick={() => handleClick()}>search</button>
         </div>
       </div>
     </div>
