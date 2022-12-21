@@ -2,10 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import SerchInput from "../SerchInput";
-import ReactPlayer from "react-player";
-import Youtube from "react-youtube";
+import {Spinner} from 'reactstrap'
 const Div = styled.div`
-  height: 100vh;
   width: 100%;
   display: grid;
   justify-items: center;
@@ -20,9 +18,11 @@ const Img = styled.img`
 const Home = () => {
   const [text, setText] = useState("");
   const [Id, setId] = useState("");
+  const [isLoading, setisLoading] = useState(false)
 
   const handleClick = async () => {
     try {
+      setisLoading(true)
       const { data } = await axios.post("http://localhost:4000/searchVideo", {
         convertedText: text,
       });
@@ -32,6 +32,8 @@ const Home = () => {
       const id = link && link.split("=");
       setId(() => id[1]);
       console.log(id);
+
+      setisLoading(false)
     } catch (error) {
       console.log(error);
     }
@@ -42,14 +44,19 @@ const Home = () => {
       <Img src={"/musiconLogo.png"} alt="Musicon" />
       <SerchInput handleClick={handleClick} setText={setText} text={text} />
       <h3>{text}</h3>
-      <iframe
+      {isLoading?<Spinner  style={{
+      height: '4rem',
+      width: '4rem'
+    }} color="primary">
+    Loading...
+  </Spinner >:<iframe
         width="600"
         height="400"
         className="video"
         title="Youtube player"
         sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
         src={Id ? `https://youtube.com/embed/${Id}?autoplay=0` : null}
-      ></iframe>
+      ></iframe>}
     </Div>
   );
 };
