@@ -35,7 +35,7 @@ export default function Register({ userValues, setUserValues, setIsLoggedIn }) {
               style={{ borderRadius: "1rem" }}
             >
               <div className="card-body p-5 text-center">
-                <h3 className="mb-5">Sign in</h3>
+                <h3 className="mb-5">Register</h3>
 
                 <div className="form-outline mb-4">
                   <input

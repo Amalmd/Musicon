@@ -6,8 +6,8 @@ import session from "express-session";
 import passport from "passport";
 import cors from "cors";
 import "./db/mongoose.js";
-import { User } from "./model/user.model.js";
 import { createUser, login } from "./controllers/controller.js";
+import { scrapeFromYoutube } from "./youtubeScraper.js";
 
 const app = express();
 dotenv.config();
@@ -46,6 +46,11 @@ app.get("/logout", function (req, res, next) {
     }
   });
   res.send("logging out");
+});
+
+app.post("/searchVideo", async (req, res) => {
+  const getData = await scrapeFromYoutube(req.body.convertedText);
+  res.status(200).send(getData);
 });
 
 app.listen("4000", function () {

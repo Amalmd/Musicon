@@ -1,6 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import SerchInput from "../SerchInput";
+import ReactPlayer from "react-player";
+import Youtube from "react-youtube";
 const Div = styled.div`
   height: 100vh;
   width: 100%;
@@ -16,11 +19,22 @@ const Img = styled.img`
 
 const Home = () => {
   const [text, setText] = useState("");
+  const [url, setUrl] = useState("");
+  const handleClick = async () => {
+    const { data } = await axios.post("http://localhost:4000/searchVideo", {
+      convertedText: text,
+    });
+    setUrl(() => data[0].link);
+    console.log(data);
+  };
+
   return (
     <Div>
       <Img src={"/musiconLogo.png"} alt="Musicon" />
-      <SerchInput setText={setText} text={text} />
+      <SerchInput handleClick={handleClick} setText={setText} text={text} />
       <h3>{text}</h3>
+      <ReactPlayer url={url} playing={false} controls volume={1} />
+      {/* <Youtube></Youtube> */}
     </Div>
   );
 };
