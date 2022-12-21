@@ -1,7 +1,8 @@
 import {connect, set} from "mongoose";
-
+import dotnev from 'dotenv'
+dotnev.config()
 set("strictQuery", false);
-console.log(process.env.CLUSTER_NAME);
+
 connect(
    `mongodb+srv://${process.env.CLUSTER_NAME}:${process.env.CLUSTER_PASS}@cluster0.0nzxfm0.mongodb.net/Musicon`,
    (error, mongoConnection) => {
