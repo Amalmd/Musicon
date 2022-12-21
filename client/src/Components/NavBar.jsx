@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -9,11 +9,24 @@ import {
   NavItem,
   NavbarText,
 } from "reactstrap";
+import { Api } from "../api/Api";
 
 function NavBar(args) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const navigate = useNavigate();
+  const logout = async (e) => {
+     e.preventDefault();
+     try {
+         await Api.get("/logout");
+        localStorage.removeItem("userValues");
+        navigate("/login");
+     } catch {
+        console.log("error");
+     }
+  };
 
   return (
     <div>
@@ -28,9 +41,12 @@ function NavBar(args) {
               </NavLink>
             </NavItem>
             <NavItem  >
-              <NavLink className='nav-link' activeclassname="active" to="/">
-                Login
+              <NavLink className='nav-link' activeclassname="active" to="/about">
+                About
               </NavLink>
+            </NavItem> 
+            <NavItem className="nav-link" onClick={logout} >
+              Logout
             </NavItem>
           </Nav>
           <NavbarText>Write in Hebrew Search in Arabic</NavbarText>
