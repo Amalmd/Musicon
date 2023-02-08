@@ -1,6 +1,6 @@
 import {connect, set} from "mongoose";
-import dotnev from 'dotenv'
-dotnev.config()
+import dotenv from 'dotenv'
+dotenv.config()
 set("strictQuery", false);
 
 connect(

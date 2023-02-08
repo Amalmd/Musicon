@@ -25,6 +25,7 @@ const Home = () => {
          const {data} = await Api.post("/searchVideo", {
             convertedText: text,
          });
+         console.log(data);
          const link = await data[0].link;
          const id = link && link.split("=");
          setId(() => id[1]);

@@ -1,4 +1,4 @@
-const letters = {
+export const aletters = {
   א: "ا",
   ב: "ب",
   ג: "ج",
@@ -28,7 +28,38 @@ const letters = {
   ת: "ت",
 };
 
-export const converText = (text) => {
+export const hletters = {
+	ا : "א",
+	ب : "ב",
+	ج : "ג",
+	د : "ד",
+	ه : "ה",
+	و : "ו",
+	ز : "ז",
+	ح : "ח",
+	ط : "ט",
+	ي : "י",
+	خ : "כ",
+	خ : "ך",
+	ل : "ל",
+	م : "מ",
+	م : "ם",
+	ن : "נ",
+	ن : "ן",
+	س : "ס",
+	ع : "ע",
+	ف : "פ",
+	ف : "ף",
+	تس :"צ",
+	تس :"ץ",
+	ك : "ק",
+	ر : "ר",
+	ش : "ש",
+	ت : "ת",
+   
+   }
+
+export const converText = (text,letters) => {
   let convertedText = "";
   for (let i = 0; i < text.length; i++)
     for (let letter in letters) {
@@ -42,3 +73,5 @@ export const converText = (text) => {
     }
   return convertedText;
 };
+
+
